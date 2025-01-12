@@ -33,7 +33,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 //		//fin prueba consumoAPI
 
 		Principal principal = new Principal();
-		System.out.println(principal.obtenerDatosLibro());
+		principal.mostrarMenu();
 
 	}
 }
