@@ -42,6 +42,8 @@ public class Principal {
             6 - Salir
             """;
 
+
+
     public void mostrarMenu(){
         do{
             do{
@@ -68,8 +70,10 @@ public class Principal {
                     listarAutoresRegistrados();
                     break;
                 case 4:
+                    listarAutoresVivosAnio();
                     break;
                 case 5:
+                    listarLibrosPorIdioma();
                     break;
                 case 6:
                     System.out.println("Fin de la aplicación...");
@@ -128,12 +132,6 @@ public class Principal {
     private void listarLibrosRegistrados(){
         List<Libro> libros = repositorioLibro.listarLibros();
         System.out.println("Libros registrados: ");
-//        libros.forEach(l -> System.out.println("------------- Libro -------------\n" +
-//                "Titulo: " + l.getTitulo() + "\n" +
-//                "Autor: " + l.getAutor().getNombre() + "\n" +
-//                "Idioma: " + l.getIdioma() + "\n" +
-//                "Descargas: " + l.getNumeroDescargas() + "\n" +
-//                "---------------------------------"));
         libros.forEach(System.out::println);
     }
 
@@ -141,6 +139,59 @@ public class Principal {
         List<Autor> autores = repositorioAutor.listarAutores();
         System.out.println("Autores encontrados: \n");
         autores.forEach(System.out::println);
+    }
+
+    private void listarAutoresVivosAnio(){
+        System.out.println("Introduce el año: ");
+        var busquedaAnio = teclado.nextInt();
+        List<Autor> autores = repositorioAutor.listarAutoresVivosAnio(busquedaAnio);
+
+        if(autores.isEmpty()){
+            System.out.println("No se encontraron autores vivos en el año " + busquedaAnio);
+        }else{
+            System.out.println("Autores encontrados: ");
+            autores.forEach(System.out::println);
+        }
+        teclado.nextLine();
+    }
+
+    private void listarLibrosPorIdioma(){
+        String idioma = """
+            Elige un idioma:\s
+            es - Español
+            en - Inglés
+            fr - Francés
+            pt - Portugués
+           \s""";
+        String opcionIdioma;
+        boolean ok = false;
+        List<Libro> libros = null;
+
+        while (!ok){
+            System.out.println(idioma);
+            opcionIdioma = teclado.nextLine();
+
+            switch (opcionIdioma){
+                case "es":
+                case "en":
+                case "fr":
+                case "pt":
+                    libros = repositorioLibro.listarPorIdioma(opcionIdioma);
+                    ok = true;
+                    break;
+                default:
+                    System.out.println("Idioma no válido. Selecciona una opción correcta");
+                    break;
+            }
+        }
+
+        System.out.println("Libros encontrados: ");
+        libros.forEach(System.out::println);
+
+
+
+
+
     }
 
 }
