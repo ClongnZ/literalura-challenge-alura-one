@@ -10,6 +10,7 @@ import com.literalura.service.ConsumoAPI;
 import com.literalura.service.ConvierteDatos;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -61,6 +62,7 @@ public class Principal {
                     buscarLibro();
                     break;
                 case 2:
+                    listarLibros();
                     break;
                 case 3:
                     break;
@@ -120,6 +122,17 @@ public class Principal {
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    private void listarLibros(){
+        List<Libro> libros = repositorioLibro.listarLibros();
+        System.out.println("Libros registrados: ");
+        libros.forEach(l -> System.out.println("------------- Libro -------------\n" +
+                "Titulo: " + l.getTitulo() + "\n" +
+                "Autor: " + l.getAutor().getNombre() + "\n" +
+                "Idioma: " + l.getIdioma() + "\n" +
+                "Descargas: " + l.getNumeroDescargas() + "\n" +
+                "---------------------------------"));
     }
 
 }
