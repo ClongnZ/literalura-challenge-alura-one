@@ -62,9 +62,10 @@ public class Principal {
                     buscarLibro();
                     break;
                 case 2:
-                    listarLibros();
+                    listarLibrosRegistrados();
                     break;
                 case 3:
+                    listarAutoresRegistrados();
                     break;
                 case 4:
                     break;
@@ -124,15 +125,22 @@ public class Principal {
         }
     }
 
-    private void listarLibros(){
+    private void listarLibrosRegistrados(){
         List<Libro> libros = repositorioLibro.listarLibros();
         System.out.println("Libros registrados: ");
-        libros.forEach(l -> System.out.println("------------- Libro -------------\n" +
-                "Titulo: " + l.getTitulo() + "\n" +
-                "Autor: " + l.getAutor().getNombre() + "\n" +
-                "Idioma: " + l.getIdioma() + "\n" +
-                "Descargas: " + l.getNumeroDescargas() + "\n" +
-                "---------------------------------"));
+//        libros.forEach(l -> System.out.println("------------- Libro -------------\n" +
+//                "Titulo: " + l.getTitulo() + "\n" +
+//                "Autor: " + l.getAutor().getNombre() + "\n" +
+//                "Idioma: " + l.getIdioma() + "\n" +
+//                "Descargas: " + l.getNumeroDescargas() + "\n" +
+//                "---------------------------------"));
+        libros.forEach(System.out::println);
+    }
+
+    private void listarAutoresRegistrados(){
+        List<Autor> autores = repositorioAutor.listarAutores();
+        System.out.println("Autores encontrados: \n");
+        autores.forEach(System.out::println);
     }
 
 }

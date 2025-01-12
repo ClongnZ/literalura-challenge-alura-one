@@ -58,12 +58,12 @@ public class Libro {
     }
 
     public String toString() {
-        return "---------- Libro ----------\n" +
+        return "----------- Libro -----------\n" +
                 "Titulo: " + titulo + "\n" +
-                "Autor: " + autor + '\n' +
+                "Autor: " + autor.getNombre() + '\n' +
                 "Idioma: " + idioma + '\n' +
                 "Numero de Descargas: " + numeroDescargas
-                + "\n-----------------------------\n";
+                + "\n-----------------------------";
     }
 
 }
