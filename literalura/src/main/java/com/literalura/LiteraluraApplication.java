@@ -1,5 +1,6 @@
 package com.literalura;
 
+import com.literalura.principal.Principal;
 import com.literalura.service.ConsumoAPI;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,20 +17,23 @@ public class LiteraluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("****************Prueba**************");
-		//inicio prueba ConsumoAPI
-		ConsumoAPI consumoAPI = new ConsumoAPI();
-		Scanner teclado = new Scanner(System.in);
+//		System.out.println("****************Prueba**************");
+//		//inicio prueba ConsumoAPI
+//		ConsumoAPI consumoAPI = new ConsumoAPI();
+//		Scanner teclado = new Scanner(System.in);
+//
+//		System.out.println("Ingresar nombre del libro: ");
+//
+//		var libro = teclado.nextLine();
+//		var json = consumoAPI
+//				.obtenerDatos("http://gutendex.com/books/?search="+libro.replace(" ","%20"));
+//
+//		System.out.println("Datos obtenidos: ");
+//		System.out.println(json);
+//		//fin prueba consumoAPI
 
-		System.out.println("Ingresar nombre del libro: ");
-
-		var libro = teclado.nextLine();
-		var json = consumoAPI
-				.obtenerDatos("http://gutendex.com/books/?search="+libro.replace(" ","%20"));
-
-		System.out.println("Datos obtenidos: ");
-		System.out.println(json);
-		//fin prueba consumoAPI
+		Principal principal = new Principal();
+		System.out.println(principal.obtenerDatosLibro());
 
 	}
 }
