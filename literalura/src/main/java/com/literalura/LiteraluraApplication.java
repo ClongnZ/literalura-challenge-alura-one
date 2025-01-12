@@ -1,7 +1,10 @@
 package com.literalura;
 
 import com.literalura.principal.Principal;
+import com.literalura.repository.AutorRepository;
+import com.literalura.repository.LibroRepository;
 import com.literalura.service.ConsumoAPI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +17,11 @@ public class LiteraluraApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(LiteraluraApplication.class, args);
 	}
+
+	@Autowired
+	private LibroRepository libroRepository;
+	@Autowired
+	private AutorRepository autorRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -32,7 +40,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 //		System.out.println(json);
 //		//fin prueba consumoAPI
 
-		Principal principal = new Principal();
+		Principal principal = new Principal(libroRepository, autorRepository);
 		principal.mostrarMenu();
 
 	}

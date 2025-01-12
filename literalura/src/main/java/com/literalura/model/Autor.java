@@ -1,10 +1,26 @@
 package com.literalura.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "Autores")
 public class Autor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     private String nombre;
     private Integer nacimiento;
     private Integer fallecimiento;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Libro> libros;
+
+    public Autor(){
+
+    }
 
     public Autor(AutorDTO autorDTO){
         this.nombre = autorDTO.nombre();
@@ -36,5 +52,22 @@ public class Autor {
         this.fallecimiento = fallecimiento;
     }
 
+    public List<Libro> getLibros() {
+        return libros;
+    }
 
+    public void setLibros(List<Libro> libros) {
+        libros.forEach(l -> l.setAutor(this));
+        this.libros = libros;
+    }
+
+    @Override
+    public String toString() {
+        return "--------- Autor ----------\n" +
+                "Nombre: " +nombre + "\n" +
+                "Fecha de Nacimiento: " + nacimiento + "\n" +
+                "Fecha de Fallecimiento: " + fallecimiento + "\n" +
+                "Libros: " + libros.stream().map(Libro::getTitulo).reduce((a, b) -> a + ", " + b).orElse("")
+                + "\n-----------------";
+    }
 }

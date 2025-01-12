@@ -1,11 +1,23 @@
 package com.literalura.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "libros")
 public class Libro {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String titulo;
     private String idioma;
     private Integer numeroDescargas;
+    @ManyToOne
     private Autor autor;
+
+    public Libro(){
+
+    }
 
     public Libro(LibroDTO libroDTO){
         this.titulo = libroDTO.titulo();
@@ -45,6 +57,13 @@ public class Libro {
         this.autor = autor;
     }
 
-
+    public String toString() {
+        return "---------- Libro ----------\n" +
+                "Titulo: " + titulo + "\n" +
+                "Autor: " + autor + '\n' +
+                "Idioma: " + idioma + '\n' +
+                "Numero de Descargas: " + numeroDescargas
+                + "\n-----------------------------\n";
+    }
 
 }
