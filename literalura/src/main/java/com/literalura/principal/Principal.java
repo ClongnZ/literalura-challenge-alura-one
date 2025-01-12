@@ -97,8 +97,9 @@ public class Principal {
 
             //Obtiene datos de API
             var datosApi = consumoAPI.obtenerDatos(URL_BASE + libroBuscado.replace(" ", "%20"));
-// borrar ---> Datos obtenidos
-            System.out.println(datosApi);
+            //Datos obtenidos
+//            System.out.println(datosApi);
+
 
             //Convierte datos
             LibroDTO datos = convertir.obtenerDatos(datosApi, LibroDTO.class);
@@ -117,15 +118,16 @@ public class Principal {
             //Agrega autor al libro
             libro.setAutor(autor);
 
+            System.out.println(libro.toString());
             //Guarda libro en DB
             repositorioLibro.save(libro);
             System.out.println("Libro guardado en la base de datos con éxito");
 
 
         } catch (LibroDuplicado e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         } catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -137,7 +139,7 @@ public class Principal {
 
     private void listarAutoresRegistrados(){
         List<Autor> autores = repositorioAutor.listarAutores();
-        System.out.println("Autores encontrados: \n");
+        System.out.println("Autores encontrados: ");
         autores.forEach(System.out::println);
     }
 
@@ -187,10 +189,6 @@ public class Principal {
 
         System.out.println("Libros encontrados: ");
         libros.forEach(System.out::println);
-
-
-
-
 
     }
 

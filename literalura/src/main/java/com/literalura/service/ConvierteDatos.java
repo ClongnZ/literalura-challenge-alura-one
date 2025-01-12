@@ -16,7 +16,8 @@ public class ConvierteDatos implements IConvierteDatos{
 
             if (apiRespuesta != null && apiRespuesta.getResultado() != null && !apiRespuesta.getResultado().isEmpty()) {
                 LibroDTO libroDTO = apiRespuesta.getResultado().get(0);
-                System.out.println("Primer libro de la lista: " + libroDTO);
+                System.out.println("Libro encontrado: ");
+//                System.out.println("Primer libro de la lista: " + libroDTO);
                 return (T) libroDTO;
             } else {
                 throw new RuntimeException("No se encontró ningún libro");
